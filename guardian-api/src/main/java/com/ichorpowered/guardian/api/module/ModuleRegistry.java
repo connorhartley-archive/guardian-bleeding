@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * Represents a container for module defintions.
+ * Represents a container for module definitions.
  */
 public interface ModuleRegistry {
 
@@ -94,45 +94,5 @@ public interface ModuleRegistry {
      * @param <M> the module type
      */
     <M> void disableModules(Predicate<M> predicate);
-
-    // TODO: Move this to detection class.
-    enum State {
-
-        /**
-         * Represents the state in which modules have been initialized
-         * and must carry out procedures to get ready for active checking.
-         *
-         * References must be initialized before {@code State.STARTED} or
-         * else checks may reference non-initialized or unready fields.
-         */
-        STARTING,
-
-        /**
-         * Represents the state in which modules have carried out procedures
-         * and have been enlisted to undertake active checking.
-         *
-         * References should be initialized before switching to this state.
-         */
-        STARTED,
-
-        /**
-         * Represents the state in which new active checking is stopped and
-         * some ending procedures may take place.
-         */
-        FINISHING,
-
-        /**
-         * Represents the state in which the module has no more active checks
-         * and is ready to be removed.
-         */
-        FINISHED,
-
-        /**
-         * Represents the default state when the module has not been initialized
-         * or what is set before the module is removed.
-         */
-        UNDEFINED
-
-    }
 
 }

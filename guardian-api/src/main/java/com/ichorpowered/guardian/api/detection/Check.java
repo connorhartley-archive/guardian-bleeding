@@ -21,25 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.module;
+package com.ichorpowered.guardian.api.detection;
+
+import com.ichorpowered.guardian.api.Guardian;
 
 /**
- * Represents an optional template that modules
- * may use to be provided with enable and disable
- * methods.
+ * Represents a series of operations and
+ * conditions to determine if the actions
+ * of a player may be illegal, inappropriate
+ * or otherwise harmful to the server.
+ *
+ * @param <E> the check owner type
+ * @param <F> the check owner configuration type
  */
-public interface ModuleExtension {
+public interface Check<E extends Guardian, F> {
 
     /**
-     * The method that is invoked after the {@link ModuleRegistry}
-     * initializes it.
+     * Returns the plugin that owns this check.
+     *
+     * @return the check owner
      */
-    void onConstruction();
+    E getOwner();
 
     /**
-     * The method that is invoked before the {@link ModuleRegistry}
-     * unloads it.
+     * Returns the {@link Detection<E, F>} that owns this check.
+     *
+     * @return the check owner
      */
-    void onDeconstruction();
+    Detection<E, F> getDetection();
 
 }

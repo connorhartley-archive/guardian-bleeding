@@ -23,23 +23,58 @@
  */
 package com.ichorpowered.guardian.api;
 
+import com.ichorpowered.guardian.api.detection.DetectionRegistry;
+import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;
+import com.ichorpowered.guardian.api.penalty.PenaltyRegistry;
 import com.ichorpowered.guardian.api.util.ImplementationException;
 
+import javax.annotation.Nullable;
 import java.util.logging.Logger;
 
+/**
+ * Represents an accessor to registries for
+ * this cheat detection system.
+ */
 public interface Guardian {
 
-    <T extends Guardian> T getInstance() throws ImplementationException;
+    /**
+     * Returns the instance of the implementation from
+     * a class if present.
+     *
+     * @param clazz the implementation class
+     * @param <T> the implementation class type
+     * @return possible implementation instance
+     * @throws ImplementationException possible exception
+     */
+    <T extends Guardian> T getInstance(@Nullable Class<T> clazz) throws ImplementationException;
 
-    Logger getLogger();
-
+    /**
+     * Returns the module registry.
+     *
+     * @return the module registry
+     */
     ModuleRegistry getModuleRegistry();
 
-    void getDetectionRegistry();
+    /**
+     * Returns the detection registry.
+     *
+     * @return the detection registry
+     */
+    DetectionRegistry getDetectionRegistry();
 
-    void getHeuristicRegistry();
+    /**
+     * Returns the heuristic registry.
+     *
+     * @return the heuristic registry
+     */
+    HeuristicRegistry getHeuristicRegistry();
 
-    void getPenaltyRegistry();
+    /**
+     * Returns the penalty registry.
+     *
+     * @return the penalty registry
+     */
+    PenaltyRegistry getPenaltyRegistry();
 
 }
