@@ -21,49 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.api.sequence;
 
-import com.ichorpowered.guardian.api.Guardian;
-
-import javax.annotation.Nonnull;
+import com.ichorpowered.guardian.api.detection.Check;
 
 /**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
+ * Represents a blueprint for creating a {@link Sequence}
+ * for {@link Check}.
  *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
+ * @param <E> the check detections owner type
+ * @param <F> the check detections configuration type
+ * @param <P> the player type
  */
-public interface Check<E, F> {
+public interface SequenceBlueprint<E, F, P> {
 
     /**
-     * Returns the plugin that owns the detection
-     * that created this check.
+     * Creates a new {@link Sequence} and passes in the player.
      *
-     * @return the detection owner
+     * @param player the player
+     * @return the sequence
      */
-    @Nonnull
-    E getOwner();
+    Sequence<E, F, P> create(P player);
 
     /**
-     * Returns the {@link Detection} that owns this check.
+     * Returns the {@link Check} that owns this {@link Sequence}.
      *
-     * @return the check owner
+     * @return the check
      */
-    @Nonnull
-    Detection<E, F> getDetection();
-
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    Check<E, F> getCheck();
 
 }

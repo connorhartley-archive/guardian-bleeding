@@ -21,49 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.sequence;
 
 import com.ichorpowered.guardian.api.Guardian;
+import com.ichorpowered.guardian.api.sequence.SequenceManager;
+import com.ichorpowered.guardian.api.util.ImplementationException;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.Event;
 
-import javax.annotation.Nonnull;
+public final class SimpleSequenceManager implements SequenceManager<Player, Event> {
 
-/**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
- *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
- */
-public interface Check<E, F> {
+    private Guardian plugin;
 
-    /**
-     * Returns the plugin that owns the detection
-     * that created this check.
-     *
-     * @return the detection owner
-     */
-    @Nonnull
-    E getOwner();
+    public SimpleSequenceManager(Guardian plugin) {
+        this.plugin = plugin;
+    }
 
-    /**
-     * Returns the {@link Detection} that owns this check.
-     *
-     * @return the check owner
-     */
-    @Nonnull
-    Detection<E, F> getDetection();
+    @Override
+    public void invoke(Player player, Event event) throws ImplementationException {
 
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    }
 
+    @Override
+    public void clean(boolean force) {
+
+    }
+
+    @Override
+    public void clean(Player player, boolean force) throws ImplementationException {
+
+    }
 }

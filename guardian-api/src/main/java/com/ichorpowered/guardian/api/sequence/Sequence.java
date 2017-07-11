@@ -21,49 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.api.sequence;
 
-import com.ichorpowered.guardian.api.Guardian;
-
-import javax.annotation.Nonnull;
+import com.ichorpowered.guardian.api.sequence.action.Action;
 
 /**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
+ * Represents a sequence of {@link Action}s that can be
+ * run in a chain.
  *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
+ * @param <E> the event type
+ * @param <F> the detection
+ * @param <P> the player type
  */
-public interface Check<E, F> {
+public interface Sequence<E, F, P> {
 
     /**
-     * Returns the plugin that owns the detection
-     * that created this check.
+     * Returns the result of applying the
+     * player and event to the sequence.
      *
-     * @return the detection owner
+     * @param player the player
+     * @param event the event
+     * @param <T> the event type
+     * @return the result
      */
-    @Nonnull
-    E getOwner();
-
-    /**
-     * Returns the {@link Detection} that owns this check.
-     *
-     * @return the check owner
-     */
-    @Nonnull
-    Detection<E, F> getDetection();
-
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    <T> boolean apply(P player, T event);
 
 }

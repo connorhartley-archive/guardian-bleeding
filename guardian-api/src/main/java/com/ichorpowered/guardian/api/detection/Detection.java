@@ -23,8 +23,6 @@
  */
 package com.ichorpowered.guardian.api.detection;
 
-import com.ichorpowered.guardian.api.Guardian;
-
 import javax.annotation.Nonnull;
 
 /**
@@ -35,7 +33,7 @@ import javax.annotation.Nonnull;
  * @param <E> the detection owner type
  * @param <F> the detection configuration type
  */
-public interface Detection<E extends Guardian, F> {
+public interface Detection<E, F> {
 
     /**
      * Returns the plugin that owns this detection.
@@ -63,7 +61,7 @@ public interface Detection<E extends Guardian, F> {
     F getConfiguration();
 
     /**
-     * Returns the state of readiness the module is in.
+     * Returns the state of readiness the detection is in.
      *
      * @return the state of readiness
      */
@@ -71,7 +69,7 @@ public interface Detection<E extends Guardian, F> {
     State getState();
 
     /**
-     * Sets the state of readiness the module is in.
+     * Sets the state of readiness the detection is in.
      *
      * @param state the state of readiness
      */
@@ -80,16 +78,16 @@ public interface Detection<E extends Guardian, F> {
     enum State {
 
         /**
-         * Represents the state in which modules have been initialized
+         * Represents the state in which the detections have been initialized
          * and must carry out procedures to get ready for active checking.
          *
          * <p>References must be initialized before {@code State.STARTED} or
-         * else checks may reference non-initialized or unready fields.</p>
+         * else checks may try access non-initialized or unready references.</p>
          */
         STARTING,
 
         /**
-         * Represents the state in which modules have carried out procedures
+         * Represents the state in which the detections have carried out procedures
          * and have been enlisted to undertake active checking.
          *
          * <p>References should be initialized before switching to this state.</p>
@@ -98,13 +96,13 @@ public interface Detection<E extends Guardian, F> {
 
         /**
          * Represents the state in which new active checking is stopped and
-         * some ending procedures may take place.
+         * ending procedures should take place.
          */
         FINISHING,
 
         /**
-         * Represents the state in which the module has no more active checks
-         * and is ready to be removed.
+         * Represents the state in which the detections have no more active checks
+         * and are ready to be removed.
          */
         FINISHED,
 

@@ -31,7 +31,9 @@ import com.ichorpowered.guardian.api.detection.DetectionRegistry;
 import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;
 import com.ichorpowered.guardian.api.penalty.PenaltyRegistry;
+import com.ichorpowered.guardian.api.sequence.SequenceManager;
 import com.ichorpowered.guardian.api.util.ImplementationException;
+import com.ichorpowered.guardian.sequence.SimpleSequenceManager;
 import org.bstats.MetricsLite;
 import org.slf4j.Logger;
 import org.spongepowered.api.config.ConfigDir;
@@ -90,11 +92,6 @@ public class GuardianBootstrap implements Guardian {
     }
 
     @Override
-    public ModuleRegistry getModuleRegistry() {
-        return null;
-    }
-
-    @Override
     public DetectionRegistry getDetectionRegistry() {
         return null;
     }
@@ -105,8 +102,18 @@ public class GuardianBootstrap implements Guardian {
     }
 
     @Override
+    public ModuleRegistry getModuleRegistry() {
+        return null;
+    }
+
+    @Override
     public PenaltyRegistry getPenaltyRegistry() {
         return null;
+    }
+
+    @Override
+    public SequenceManager getSequenceManager() {
+        return new SimpleSequenceManager(this);
     }
 
 }

@@ -27,6 +27,7 @@ import com.ichorpowered.guardian.api.detection.DetectionRegistry;
 import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;
 import com.ichorpowered.guardian.api.penalty.PenaltyRegistry;
+import com.ichorpowered.guardian.api.sequence.SequenceManager;
 import com.ichorpowered.guardian.api.util.ImplementationException;
 
 import javax.annotation.Nullable;
@@ -49,13 +50,6 @@ public interface Guardian {
     <T extends Guardian> T getInstance(@Nullable Class<T> clazz) throws ImplementationException;
 
     /**
-     * Returns the module registry.
-     *
-     * @return the module registry
-     */
-    ModuleRegistry getModuleRegistry();
-
-    /**
      * Returns the detection registry.
      *
      * @return the detection registry
@@ -70,10 +64,24 @@ public interface Guardian {
     HeuristicRegistry getHeuristicRegistry();
 
     /**
+     * Returns the module registry.
+     *
+     * @return the module registry
+     */
+    ModuleRegistry getModuleRegistry();
+
+    /**
      * Returns the penalty registry.
      *
      * @return the penalty registry
      */
     PenaltyRegistry getPenaltyRegistry();
+
+    /**
+     * Returns the sequence manager.
+     *
+     * @return the sequence manager
+     */
+    SequenceManager getSequenceManager();
 
 }

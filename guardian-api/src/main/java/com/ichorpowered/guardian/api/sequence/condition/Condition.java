@@ -21,49 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.api.sequence.condition;
 
-import com.ichorpowered.guardian.api.Guardian;
-
-import javax.annotation.Nonnull;
+import com.ichorpowered.guardian.api.report.Summary;
+import com.ichorpowered.guardian.api.sequence.Sequence;
 
 /**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
+ * Represents an operation used to
+ * gather and calculate data in a {@link Sequence}
+ * chain.
  *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
+ * @param <T> the event type
+ * @param <P> the player type
  */
-public interface Check<E, F> {
+@FunctionalInterface
+public interface Condition<T, P> {
 
     /**
-     * Returns the plugin that owns the detection
-     * that created this check.
+     * Returns the result of applying this condition
+     * to its arguments.
      *
-     * @return the detection owner
+     * @param player the player
+     * @param event the event
+     * @param summary the summary
+     * @param lastActionTime the last action time
+     * @param <E> the checks detection owner type
+     * @param <F> the checks detection configuration type
+     * @return the summary
      */
-    @Nonnull
-    E getOwner();
-
-    /**
-     * Returns the {@link Detection} that owns this check.
-     *
-     * @return the check owner
-     */
-    @Nonnull
-    Detection<E, F> getDetection();
-
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    <E, F> Summary<E, F> apply(P player, T event, Summary<E, F> summary, long lastActionTime);
 
 }

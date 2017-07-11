@@ -23,7 +23,6 @@
  */
 package com.ichorpowered.guardian.api.report;
 
-import com.ichorpowered.guardian.api.Guardian;
 import com.ichorpowered.guardian.api.detection.Detection;
 import org.spongepowered.api.event.cause.Cause;
 
@@ -39,7 +38,7 @@ import javax.annotation.Nullable;
  * @param <E> the detection owner type
  * @param <F> the detection configuration type
  */
-public interface Summary<E extends Guardian, F> {
+public interface Summary<E, F> {
 
     /**
      * Returns the plugin that owns the detection

@@ -21,49 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.sequence.action;
 
-import com.ichorpowered.guardian.api.Guardian;
+import com.ichorpowered.guardian.api.sequence.action.Action;
+import com.ichorpowered.guardian.api.sequence.condition.Condition;
+import org.spongepowered.api.entity.living.player.Player;
 
 import javax.annotation.Nonnull;
 
-/**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
- *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
- */
-public interface Check<E, F> {
+public class SimpleAction<T> implements Action<T, Player> {
 
-    /**
-     * Returns the plugin that owns the detection
-     * that created this check.
-     *
-     * @return the detection owner
-     */
-    @Nonnull
-    E getOwner();
+    @Override
+    public void addCondition(@Nonnull Condition<T, Player> condition) {
 
-    /**
-     * Returns the {@link Detection} that owns this check.
-     *
-     * @return the check owner
-     */
-    @Nonnull
-    Detection<E, F> getDetection();
+    }
 
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    @Override
+    public void setDelay(int time) {
+
+    }
+
+    @Override
+    public void setExpire(int time) {
+
+    }
+
+    @Override
+    public boolean apply(Player player, T event, long lastActionTime) {
+        return false;
+    }
+
+    @Override
+    public boolean succeed(Player player, T event, long lastActionTime) {
+        return false;
+    }
+
+    @Override
+    public boolean fail(Player player, T event, long lastActionTime) {
+        return false;
+    }
+
+    @Override
+    public int getDelay() {
+        return 0;
+    }
+
+    @Override
+    public int getExpire() {
+        return 0;
+    }
+
+    @Override
+    public Class<? extends T> getEvent() {
+        return null;
+    }
 
 }

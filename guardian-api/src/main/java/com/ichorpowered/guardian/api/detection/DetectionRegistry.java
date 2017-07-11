@@ -23,7 +23,6 @@
  */
 package com.ichorpowered.guardian.api.detection;
 
-import com.ichorpowered.guardian.api.Guardian;
 import com.me4502.precogs.detection.CommonDetectionTypes;
 import org.spongepowered.api.plugin.PluginContainer;
 
@@ -60,7 +59,7 @@ public interface DetectionRegistry extends Iterable<Detection> {
      * @throws IllegalArgumentException if the specified arguments are not of the correct type
      */
     @Nonnull
-    <E extends Guardian, F> Detection<E, F> expect(@Nonnull Class<? extends Detection<E, F>> key)
+    <E, F> Detection<E, F> expect(@Nonnull Class<? extends Detection<E, F>> key)
             throws NoSuchElementException, IllegalArgumentException;
 
     /**

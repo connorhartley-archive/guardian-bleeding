@@ -21,49 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.detection;
+package com.ichorpowered.guardian.api.sequence.action;
 
-import com.ichorpowered.guardian.api.Guardian;
-
-import javax.annotation.Nonnull;
+import com.ichorpowered.guardian.api.sequence.Sequence;
 
 /**
- * Represents a series of operations and
- * conditions to determine if the actions
- * of a player may be illegal, inappropriate
- * or otherwise harmful to the server.
+ * Represents a blueprint for creating an {@link Action}
+ * for a {@link Sequence}.
  *
- * @param <E> the check owner type
- * @param <F> the check owner configuration type
+ * @param <T> the event type
+ * @param <P> the player type
  */
-public interface Check<E, F> {
+public interface ActionBlueprint<T, P> {
 
     /**
-     * Returns the plugin that owns the detection
-     * that created this check.
+     * Creates a new {@link Action}.
      *
-     * @return the detection owner
+     * @return the action
      */
-    @Nonnull
-    E getOwner();
-
-    /**
-     * Returns the {@link Detection} that owns this check.
-     *
-     * @return the check owner
-     */
-    @Nonnull
-    Detection<E, F> getDetection();
-
-    /**
-     * Compares this check to another check and returns true,
-     * if they are the same, false if they are not.
-     *
-     * @param check another check
-     * @param <K> another check owner type
-     * @param <G> another check owner configuration type
-     * @return true whether they are the same, false if not
-     */
-    <K extends Guardian, G> boolean compare(Check<K, G> check);
+    Action<T, P> create();
 
 }
