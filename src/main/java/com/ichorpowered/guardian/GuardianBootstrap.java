@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -85,7 +85,7 @@ public class GuardianBootstrap implements Guardian {
 
     @Override
     public <T extends Guardian> T getInstance(Class<T> clazz) throws ImplementationException {
-        if (this.getClass() != clazz) throw new ImplementationException("Invalid implementation reference!");
+        if (this.getClass() != clazz) throw new ImplementationException(String.format("Invalid implementation reference for '%s'!", clazz.getName()));
         return (T) this;
     }
 

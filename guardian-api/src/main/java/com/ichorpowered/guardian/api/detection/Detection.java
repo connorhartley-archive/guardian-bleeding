@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -29,11 +29,11 @@ import javax.annotation.Nonnull;
 
 /**
  * Represents a type of cheat or illegal
- * operation that may contain many checks
- * scan on players.
+ * activity, that can be found by running
+ * specific checks on players actively.
  *
  * @param <E> the detection owner type
- * @param <F> the detection owner configuration type
+ * @param <F> the detection configuration type
  */
 public interface Detection<E extends Guardian, F> {
 
@@ -42,6 +42,7 @@ public interface Detection<E extends Guardian, F> {
      *
      * @return the detection owner
      */
+    @Nonnull
     E getOwner();
 
     /**
@@ -50,6 +51,7 @@ public interface Detection<E extends Guardian, F> {
      * @param permissionTarget the permission target
      * @return the permission node
      */
+    @Nonnull
     String getPermission(@Nonnull String permissionTarget);
 
     /**
@@ -57,6 +59,7 @@ public interface Detection<E extends Guardian, F> {
      *
      * @return the detection configuration
      */
+    @Nonnull
     F getConfiguration();
 
     /**
@@ -64,6 +67,7 @@ public interface Detection<E extends Guardian, F> {
      *
      * @return the state of readiness
      */
+    @Nonnull
     State getState();
 
     /**
@@ -79,8 +83,8 @@ public interface Detection<E extends Guardian, F> {
          * Represents the state in which modules have been initialized
          * and must carry out procedures to get ready for active checking.
          *
-         * References must be initialized before {@code State.STARTED} or
-         * else checks may reference non-initialized or unready fields.
+         * <p>References must be initialized before {@code State.STARTED} or
+         * else checks may reference non-initialized or unready fields.</p>
          */
         STARTING,
 
@@ -88,7 +92,7 @@ public interface Detection<E extends Guardian, F> {
          * Represents the state in which modules have carried out procedures
          * and have been enlisted to undertake active checking.
          *
-         * References should be initialized before switching to this state.
+         * <p>References should be initialized before switching to this state.</p>
          */
         STARTED,
 

@@ -21,7 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.penalty;
+package com.ichorpowered.guardian.api.heuristic;
 
-public interface PenaltyRegistry {
+import org.spongepowered.api.plugin.PluginContainer;
+
+import java.util.function.Function;
+
+/**
+ * Represents an operation used to analyze
+ * existing reports and produce its own from
+ * to improve the accuracy of the outcome.
+ */
+public interface Heuristic {
+
+    /**
+     * Returns the function used for analysis.
+     *
+     * @return the analysis function
+     */
+    Function<PluginContainer, Boolean> getFunction();
+
 }

@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -25,6 +25,8 @@ package com.ichorpowered.guardian.api.detection;
 
 import com.ichorpowered.guardian.api.Guardian;
 
+import javax.annotation.Nonnull;
+
 /**
  * Represents a series of operations and
  * conditions to determine if the actions
@@ -37,17 +39,20 @@ import com.ichorpowered.guardian.api.Guardian;
 public interface Check<E extends Guardian, F> {
 
     /**
-     * Returns the plugin that owns this check.
+     * Returns the plugin that owns the detection
+     * that created this check.
      *
-     * @return the check owner
+     * @return the detection owner
      */
+    @Nonnull
     E getOwner();
 
     /**
-     * Returns the {@link Detection<E, F>} that owns this check.
+     * Returns the {@link Detection} that owns this check.
      *
      * @return the check owner
      */
+    @Nonnull
     Detection<E, F> getDetection();
 
 }

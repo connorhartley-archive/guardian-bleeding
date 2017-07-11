@@ -5,6 +5,7 @@ plugins {
     id 'ninja.miserable.blossom' version '1.0.1'
 }
 
+apply plugin: 'checkstyle'
 apply plugin: 'org.spongepowered.plugin'
 apply plugin: 'com.github.hierynomus.license'
 
@@ -61,6 +62,15 @@ license {
     mapping {
         java = 'SLASHSTAR_STYLE'
     }
+}
+
+checkstyle {
+    toolVersion = '7.6.1'
+    configFile = file('../checkstyle.xml')
+    configProperties = [
+            'basedir': project.projectDir,
+            'severity': 'warning'
+    ]
 }
 
 task sourceJar(type: Jar) {

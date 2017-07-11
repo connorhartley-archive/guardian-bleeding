@@ -21,54 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.api.report;
 
-import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.event.cause.Cause;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Represents a registry for heuristics.
+ * Represents a brief report created by a
+ * single operation that can be provided
+ * as evidence to the final summary.
  */
-public interface HeuristicRegistry extends Iterable<Heuristic> {
+public interface Report {
 
     /**
-     * Inserts the {@link Heuristic} into this registry.
+     * Inserts the property into this report.
      *
-     * @param pluginContainer the plugin that registered the heuristic
-     * @param key the heuristic class
-     * @param heuristic the heuristic
+     * @param key the property key
+     * @param supplier the property supplier
+     * @param <T> the property type
      */
-    void put(@Nonnull PluginContainer pluginContainer, @Nonnull Class<? extends Heuristic> key,
-             @Nonnull Heuristic heuristic);
+    <T> void put(@Nonnull String key, @Nullable Supplier<T> supplier);
 
     /**
-     * Returns the {@link Heuristic} that is represented by its key.
+     * Returns the property that is represented by its key.
      *
-     * @param key the heuristic key
-     * @return the heuristic, or {@code null} if the heuristic is not contained in this registry
-     */
-    @Nullable
-    Heuristic get(@Nonnull Class<? extends Heuristic> key);
-
-    /**
-     * Returns the key that represents its {@link Heuristic}.
-     *
-     * @param heuristic the heuristic
-     * @return the heuristic key, or {@code null} if the heuristic is not contained in this registry
+     * @param key the property key
+     * @param <T> the property type
+     * @return the property
+     * @throws IllegalArgumentException if the specified arguments are not of the correct type
      */
     @Nullable
-    Class<? extends Heuristic> key(@Nonnull Heuristic heuristic);
+    <T> T get(@Nonnull String key) throws IllegalArgumentException;
 
     /**
-     * Returns a set of keys that are contained inside this registry.
+     * Returns a set of keys contained inside this report.
      *
-     * @return a set of heuristic keys
+     * @return a set of property keys
+     */
+    Set<String> keySet();
+
+    /**
+     * Returns a cause for this report.
+     *
+     * @return the report cause
      */
     @Nonnull
-    Set<Class<? extends Heuristic>> keySet();
+    Cause getCause();
+
+    /**
+     * Sets the cause for this report.
+     *
+     * @param cause the report cause
+     */
+    void setCause(Cause cause);
 
 }

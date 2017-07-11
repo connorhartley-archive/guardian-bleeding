@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -23,5 +23,70 @@
  */
 package com.ichorpowered.guardian.api.detection;
 
-public interface DetectionRegistry {
+import com.ichorpowered.guardian.api.Guardian;
+import com.me4502.precogs.detection.CommonDetectionTypes;
+import org.spongepowered.api.plugin.PluginContainer;
+
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+/**
+ * Represents a registry for detections.
+ */
+public interface DetectionRegistry extends Iterable<Detection> {
+
+    /**
+     * Inserts the {@link Detection} into this registry.
+     *
+     * @param pluginContainer the plugin that registered the detection
+     * @param key the detection class
+     * @param detection the detection
+     * @param category the detection category
+     */
+    void put(@Nonnull PluginContainer pluginContainer, @Nonnull Class<? extends Detection> key,
+             @Nonnull Detection detection, @Nonnull CommonDetectionTypes.Category category);
+
+    /**
+     * Returns the {@link Detection} that is represented by its key.
+     *
+     * @param key the detection key
+     * @param <E> the detection owner type
+     * @param <F> the detection configuration type
+     * @return the detection
+     * @throws NoSuchElementException if the detection is not contained in this registry
+     * @throws IllegalArgumentException if the specified arguments are not of the correct type
+     */
+    @Nonnull
+    <E extends Guardian, F> Detection<E, F> expect(@Nonnull Class<? extends Detection<E, F>> key)
+            throws NoSuchElementException, IllegalArgumentException;
+
+    /**
+     * Returns the {@link Detection} that is represented by its key.
+     *
+     * @param key the detection key
+     * @return the detection, or {@code null} if the detection is not contained in this registry
+     */
+    @Nullable
+    Detection get(@Nonnull Class<? extends Detection> key);
+
+    /**
+     * Returns the key that represents its {@link Detection}.
+     *
+     * @param detection the detection
+     * @return the detection key, or {@code null} if the detection is not contained in this registry
+     */
+    @Nullable
+    Class<? extends Detection> key(@Nonnull Detection detection);
+
+    /**
+     * Returns a set of keys that are contained inside this registry.
+     *
+     * @return a set of detection keys
+     */
+    @Nonnull
+    Set<Class<? extends Detection>> keySet();
+
 }
