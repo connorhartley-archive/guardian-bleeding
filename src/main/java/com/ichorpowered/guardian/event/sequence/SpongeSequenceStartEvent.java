@@ -21,24 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.event.sequence;
 
-import java.util.function.Function;
+import com.ichorpowered.guardian.api.event.sequence.SequenceStartEvent;
+import com.ichorpowered.guardian.api.report.Summary;
+import com.ichorpowered.guardian.api.sequence.Sequence;
+import com.ichorpowered.guardian.event.AbstractGuardianEvent;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.Cancellable;
+import org.spongepowered.api.event.cause.Cause;
 
-/**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
- */
-public interface Heuristic<P> {
+public class SpongeSequenceStartEvent<E, F> extends AbstractGuardianEvent implements SequenceStartEvent<E, F, Player>, Cancellable {
 
-    /**
-     * Returns the function used for analysis.
-     *
-     * @return the analysis function
-     */
-    Function<P, Boolean> getFunction();
+
+    public SpongeSequenceStartEvent(Cause cause) {
+        super(cause);
+    }
+
+
+    @Override
+    public Sequence<E, F, Player> getSequence() {
+        return null;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return null;
+    }
+
+    @Override
+    public Summary<E, F> getSummary() {
+        return null;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return false;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+
+    }
 
 }

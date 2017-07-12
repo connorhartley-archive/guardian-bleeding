@@ -13,6 +13,7 @@ plugins {
     id 'idea'
     id 'eclipse'
     id 'signing'
+    id 'ninja.miserable.blossom' version '1.0.1'
     id 'org.spongepowered.plugin' version '0.8.1'
     id 'com.github.hierynomus.license' version '0.14.0'
     id 'com.github.johnrengelman.shadow' version '2.0.0'
@@ -60,6 +61,18 @@ dependencies {
 signing {
     required false
     sign configurations.archives
+}
+
+blossom {
+    def location = 'src/main/java/com/ichorpowered/guardian/PluginInfo.java'
+
+    replaceToken '@id@', project.pluginId, location
+    replaceToken '@name@', project.pluginName, location
+    replaceToken '@version@', version, location
+    replaceToken '@description@', project.pluginDescription, location
+    replaceToken '@databaseversion@', project.databaseVersion, location
+    replaceToken '@elderversion@', project.elderVersion, location
+    replaceToken '@precogsversion@', project.precogsVersion, location
 }
 
 license {

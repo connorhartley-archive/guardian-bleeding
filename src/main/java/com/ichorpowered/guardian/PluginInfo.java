@@ -21,24 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
-
-import java.util.function.Function;
+package com.ichorpowered.guardian;
 
 /**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
+ * Represents this plugins meta data statically. They are dynamically
+ * injected at compile time.
  */
-public interface Heuristic<P> {
+public final class PluginInfo {
 
-    /**
-     * Returns the function used for analysis.
-     *
-     * @return the analysis function
-     */
-    Function<P, Boolean> getFunction();
+    private PluginInfo() {}
+
+    public static final String ID = "@id@";
+    public static final String NAME = "@name@";
+    public static final String VERSION = "@version@";
+    public static final String DESCRIPTION = "@description@";
+
+    public static final String DATABASE_VERSION = "@databaseversion@";
+
+    public static final String ELDER_VERSION = "@elderversion@";
+    public static final String PRECOGS_VERSION = "@precogsversion";
 
 }

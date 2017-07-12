@@ -23,8 +23,6 @@
  */
 package com.ichorpowered.guardian.api.heuristic;
 
-import org.spongepowered.api.plugin.PluginContainer;
-
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -41,8 +39,9 @@ public interface HeuristicRegistry extends Iterable<Heuristic> {
      * @param pluginContainer the plugin that registered the heuristic
      * @param key the heuristic class
      * @param heuristic the heuristic
+     * @param <P> the plugin container type
      */
-    void put(@Nonnull PluginContainer pluginContainer, @Nonnull Class<? extends Heuristic> key,
+    <P> void put(@Nonnull P pluginContainer, @Nonnull Class<? extends Heuristic> key,
              @Nonnull Heuristic heuristic);
 
     /**

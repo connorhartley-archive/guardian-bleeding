@@ -21,24 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.report;
 
-import java.util.function.Function;
+import com.ichorpowered.guardian.api.report.Report;
+import org.spongepowered.api.event.cause.Cause;
 
-/**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
- */
-public interface Heuristic<P> {
+import javax.annotation.Nonnull;
+
+public abstract class AbstractReport implements Report {
+
+    public AbstractReport() {}
 
     /**
-     * Returns the function used for analysis.
+     * Returns a cause for this report.
      *
-     * @return the analysis function
+     * @return the report cause
      */
-    Function<P, Boolean> getFunction();
+    @Nonnull
+    public abstract Cause getCause();
+
+    /**
+     * Sets the cause for this report.
+     *
+     * @param cause the report cause
+     */
+    public abstract void setCause(Cause cause);
 
 }

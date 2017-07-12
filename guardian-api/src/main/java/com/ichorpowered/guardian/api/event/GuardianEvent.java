@@ -21,24 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.api.event;
 
-import java.util.function.Function;
+public interface GuardianEvent {
 
-/**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
- */
-public interface Heuristic<P> {
 
-    /**
-     * Returns the function used for analysis.
-     *
-     * @return the analysis function
-     */
-    Function<P, Boolean> getFunction();
 
 }

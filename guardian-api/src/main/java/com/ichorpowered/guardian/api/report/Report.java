@@ -23,8 +23,6 @@
  */
 package com.ichorpowered.guardian.api.report;
 
-import org.spongepowered.api.event.cause.Cause;
-
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -64,20 +62,5 @@ public interface Report {
      * @return a set of property keys
      */
     Set<String> keySet();
-
-    /**
-     * Returns a cause for this report.
-     *
-     * @return the report cause
-     */
-    @Nonnull
-    Cause getCause();
-
-    /**
-     * Sets the cause for this report.
-     *
-     * @param cause the report cause
-     */
-    void setCause(Cause cause);
 
 }

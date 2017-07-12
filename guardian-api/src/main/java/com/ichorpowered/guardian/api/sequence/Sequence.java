@@ -29,8 +29,8 @@ import com.ichorpowered.guardian.api.sequence.action.Action;
  * Represents a sequence of {@link Action}s that can be
  * run in a chain.
  *
- * @param <E> the event type
- * @param <F> the detection
+ * @param <E> the check detections owner type
+ * @param <F> the check detections configuration type
  * @param <P> the player type
  */
 public interface Sequence<E, F, P> {

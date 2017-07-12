@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'idea'
     id 'eclipse'
-    id 'ninja.miserable.blossom' version '1.0.1'
 }
 
 apply plugin: 'checkstyle'
@@ -32,18 +31,6 @@ dependencies {
     // External Dependencies
 
     compile 'com.github.me4502:Precogs:04c53049ea'
-}
-
-blossom {
-    def location = 'src/main/java/com/ichorpowered/guardian/api/PluginInfo.java'
-
-    replaceToken '@id@', project.pluginId, location
-    replaceToken '@name@', project.pluginName, location
-    replaceToken '@version@', version, location
-    replaceToken '@description@', project.pluginDescription, location
-    replaceToken '@databaseversion@', project.databaseVersion, location
-    replaceToken '@elderversion@', project.elderVersion, location
-    replaceToken '@precogsversion@', project.precogsVersion, location
 }
 
 if (JavaVersion.current().isJava8Compatible()) {

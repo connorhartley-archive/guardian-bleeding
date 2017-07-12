@@ -23,9 +23,6 @@
  */
 package com.ichorpowered.guardian.api.detection;
 
-import com.me4502.precogs.detection.CommonDetectionTypes;
-import org.spongepowered.api.plugin.PluginContainer;
-
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -43,10 +40,10 @@ public interface DetectionRegistry extends Iterable<Detection> {
      * @param pluginContainer the plugin that registered the detection
      * @param key the detection class
      * @param detection the detection
-     * @param category the detection category
+     * @param <P> the plugin container type
      */
-    void put(@Nonnull PluginContainer pluginContainer, @Nonnull Class<? extends Detection> key,
-             @Nonnull Detection detection, @Nonnull CommonDetectionTypes.Category category);
+    <P> void put(@Nonnull P pluginContainer, @Nonnull Class<? extends Detection> key,
+             @Nonnull Detection detection);
 
     /**
      * Returns the {@link Detection} that is represented by its key.

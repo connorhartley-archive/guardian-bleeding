@@ -21,25 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api;
+package com.ichorpowered.guardian.report;
 
-/**
- * Represents this plugins meta data statically. They are dynamically
- * injected at compile time.
- */
-public final class PluginInfo {
+import org.spongepowered.api.event.cause.Cause;
 
-    private PluginInfo() {}
+import javax.annotation.Nonnull;
 
-    public static final String ID = "@id@";
-    public static final String NAME = "@name@";
-    public static final String VERSION = "@version@";
-    public static final String DESCRIPTION = "@description@";
+public abstract class AbstractSummary {
 
-    public static final String DATABASE_VERSION = "@databaseversion@";
-
-    public static final String ELDER_VERSION = "@elderversion@";
-    public static final String PRECOGS_VERSION = "@precogsversion";
+    /**
+     * Returns a cause containing the history of this summary.
+     *
+     * @return cause of summary
+     */
+    @Nonnull
+    public abstract Cause getCause();
 
 }
-

@@ -21,24 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.event;
 
-import java.util.function.Function;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.impl.AbstractEvent;
 
-/**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
- */
-public interface Heuristic<P> {
+public class AbstractGuardianEvent extends AbstractEvent {
 
-    /**
-     * Returns the function used for analysis.
-     *
-     * @return the analysis function
-     */
-    Function<P, Boolean> getFunction();
+    private final Cause cause;
+
+    public AbstractGuardianEvent(Cause cause) {
+        this.cause = cause;
+    }
+
+    @Override
+    public Cause getCause() {
+        return this.cause;
+    }
 
 }

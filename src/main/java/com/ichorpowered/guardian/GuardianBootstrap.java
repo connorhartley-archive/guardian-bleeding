@@ -26,7 +26,6 @@ package com.ichorpowered.guardian;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.ichorpowered.guardian.api.Guardian;
-import com.ichorpowered.guardian.api.PluginInfo;
 import com.ichorpowered.guardian.api.detection.DetectionRegistry;
 import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;

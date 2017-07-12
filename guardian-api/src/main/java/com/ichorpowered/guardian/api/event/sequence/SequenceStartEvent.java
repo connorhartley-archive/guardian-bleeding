@@ -21,24 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.ichorpowered.guardian.api.heuristic;
+package com.ichorpowered.guardian.api.event.sequence;
 
-import java.util.function.Function;
+import com.ichorpowered.guardian.api.event.GuardianEvent;
+import com.ichorpowered.guardian.api.report.Summary;
+import com.ichorpowered.guardian.api.sequence.Sequence;
 
-/**
- * Represents an operation used to analyze
- * existing reports and produce its own from
- * to improve the accuracy of the outcome.
- *
- * @param <P> the plugin container type
- */
-public interface Heuristic<P> {
+public interface SequenceStartEvent<E, F, P> extends GuardianEvent {
 
-    /**
-     * Returns the function used for analysis.
-     *
-     * @return the analysis function
-     */
-    Function<P, Boolean> getFunction();
+    Sequence<E, F, P> getSequence();
+
+    P getPlayer();
+
+    Summary<E, F> getSummary();
 
 }

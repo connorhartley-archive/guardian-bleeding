@@ -24,7 +24,6 @@
 package com.ichorpowered.guardian.api.report;
 
 import com.ichorpowered.guardian.api.detection.Detection;
-import org.spongepowered.api.event.cause.Cause;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -79,13 +78,5 @@ public interface Summary<E, F> {
      */
     @Nullable
     <T extends Report> T view(@Nonnull Class<T> key);
-
-    /**
-     * Returns a cause containing the history of this summary.
-     *
-     * @return cause of summary
-     */
-    @Nonnull
-    Cause getCause();
 
 }
