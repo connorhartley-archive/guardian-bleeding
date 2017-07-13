@@ -25,6 +25,10 @@ package com.ichorpowered.guardian.api.detection;
 
 import com.ichorpowered.guardian.api.Guardian;
 
+import com.ichorpowered.guardian.api.report.Summary;
+import com.ichorpowered.guardian.api.sequence.action.Action;
+import com.ichorpowered.guardian.api.sequence.Sequence;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -54,6 +58,16 @@ public interface Check<E, F> {
      */
     @Nonnull
     Detection<E, F> getDetection();
+
+    /**
+     * Returns the {@link Sequence} that contains the chained
+     * {@link Action}s that produce a {@link Summary} for players
+     * checked.
+     *
+     * @param <P> the player type
+     * @return the sequence
+     */
+    <P> Sequence<E, F, P> getSequence();
 
     /**
      * Compares this check to another check and returns true,
