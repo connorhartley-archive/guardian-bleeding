@@ -27,12 +27,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.ichorpowered.guardian.api.Guardian;
 import com.ichorpowered.guardian.api.detection.DetectionRegistry;
+import com.ichorpowered.guardian.api.event.GuardianEvent;
+import com.ichorpowered.guardian.api.event.GuardianListener;
 import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;
 import com.ichorpowered.guardian.api.penalty.PenaltyRegistry;
 import com.ichorpowered.guardian.api.sequence.SequenceManager;
 import com.ichorpowered.guardian.api.util.ImplementationException;
 import com.ichorpowered.guardian.sequence.SimpleSequenceManager;
+import net.kyori.event.EventBus;
+import net.kyori.event.SimpleEventBus;
 import org.bstats.MetricsLite;
 import org.slf4j.Logger;
 import org.spongepowered.api.config.ConfigDir;
@@ -88,6 +92,11 @@ public class GuardianBootstrap implements Guardian {
     public <T extends Guardian> T getInstance(Class<T> clazz) throws ImplementationException {
         if (this.getClass() != clazz) throw new ImplementationException(String.format("Invalid implementation reference for '%s'!", clazz.getName()));
         return (T) this;
+    }
+
+    @Override
+    public SimpleEventBus<GuardianEvent, GuardianListener> getEventBus() {
+        return null;
     }
 
     @Override

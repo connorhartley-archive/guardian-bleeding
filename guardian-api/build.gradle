@@ -5,20 +5,18 @@ plugins {
 }
 
 apply plugin: 'checkstyle'
-apply plugin: 'org.spongepowered.plugin'
 apply plugin: 'com.github.hierynomus.license'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 defaultTasks 'licenseFormat', 'build'
 
 def root = project.getRootProject()
 
 group = root.pluginGroup
-version = "${root.spongeVersion}-${root.pluginVersion}-${root.pluginPatch}"
+version = "${root.pluginVersion}"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-sponge.plugin.id = pluginId
 
 repositories {
     mavenCentral()
@@ -26,11 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.spongepowered:spongeapi:${root.spongeVersion}-SNAPSHOT"
-
-    // External Dependencies
-
-    compile 'com.github.me4502:Precogs:04c53049ea'
+    compile 'com.github.kyoripowered:event:-SNAPSHOT'
 }
 
 if (JavaVersion.current().isJava8Compatible()) {
@@ -70,16 +64,22 @@ task javadocJar(type: Jar) {
     from javadoc.destinationDir
 }
 
-jar {
-    classifier = 'api'
+shadowJar {
+    classifier = ''
+
+    dependencies {
+        include(dependency('com.github.ben-manes.caffeine:caffeine'))
+        include(dependency('com.github.ben-manes.caffeine:guava'))
+        include(dependency('com.github.kyoripowered:event'))
+    }
 }
 
 artifacts {
     archives sourceJar
     archives javadocJar
-    archives jar
+    archives shadowJar
 }
 
 build.dependsOn(sourceJar)
 build.dependsOn(javadocJar)
-build.dependsOn(jar)
+build.dependsOn(shadowJar)

@@ -41,6 +41,7 @@ dependencies {
 
     // External Dependencies
 
+    compile 'com.github.me4502:Precogs:04c53049ea'
     compile 'com.github.ichorpowered:elderguardian:-SNAPSHOT'
 
     // Shaded Dependencies
@@ -142,7 +143,7 @@ task minifyShadedJar(type: ProGuardTask, group: 'Build', description: 'Minifies 
 }
 
 task copyJars(type: Copy, dependsOn: ':guardian-api:build') {
-    from([subprojects.jar, subprojects.javadocJar, shadowJar], tasks.minifyShadedJar.outJarFiles)
+    from([subprojects.shadowJar, subprojects.javadocJar, shadowJar], tasks.minifyShadedJar.outJarFiles)
     into project.file('output')
 }
 

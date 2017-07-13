@@ -24,11 +24,15 @@
 package com.ichorpowered.guardian.api;
 
 import com.ichorpowered.guardian.api.detection.DetectionRegistry;
+import com.ichorpowered.guardian.api.event.GuardianEvent;
+import com.ichorpowered.guardian.api.event.GuardianListener;
 import com.ichorpowered.guardian.api.heuristic.HeuristicRegistry;
 import com.ichorpowered.guardian.api.module.ModuleRegistry;
 import com.ichorpowered.guardian.api.penalty.PenaltyRegistry;
 import com.ichorpowered.guardian.api.sequence.SequenceManager;
 import com.ichorpowered.guardian.api.util.ImplementationException;
+import net.kyori.event.EventBus;
+import net.kyori.event.SimpleEventBus;
 
 import javax.annotation.Nullable;
 
@@ -48,6 +52,13 @@ public interface Guardian {
      * @throws ImplementationException possible exception
      */
     <T extends Guardian> T getInstance(@Nullable Class<T> clazz) throws ImplementationException;
+
+    /**
+     * Returns the event bus.
+     *
+     * @return the event bus
+     */
+    SimpleEventBus<GuardianEvent, GuardianListener> getEventBus();
 
     /**
      * Returns the detection registry.

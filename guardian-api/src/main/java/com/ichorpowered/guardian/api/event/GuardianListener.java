@@ -23,6 +23,6 @@
  */
 package com.ichorpowered.guardian.api.event;
 
-public interface GuardianEvent {
+public interface GuardianListener {
 
 }
