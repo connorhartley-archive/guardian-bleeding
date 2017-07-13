@@ -21,10 +21,11 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
 }
 
 dependencies {
-    compile 'com.github.kyoripowered:event:-SNAPSHOT'
+    compile 'net.kyori:event:1.0.0-SNAPSHOT'
 }
 
 if (JavaVersion.current().isJava8Compatible()) {

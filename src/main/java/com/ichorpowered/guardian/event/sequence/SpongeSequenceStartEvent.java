@@ -23,45 +23,58 @@
  */
 package com.ichorpowered.guardian.event.sequence;
 
+import com.ichorpowered.guardian.api.event.origin.Origin;
 import com.ichorpowered.guardian.api.event.sequence.SequenceStartEvent;
 import com.ichorpowered.guardian.api.report.Summary;
 import com.ichorpowered.guardian.api.sequence.Sequence;
-import com.ichorpowered.guardian.event.AbstractGuardianEvent;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Cancellable;
-import org.spongepowered.api.event.cause.Cause;
 
-public class SpongeSequenceStartEvent<E, F> extends AbstractGuardianEvent implements SequenceStartEvent<E, F, Player>, Cancellable {
+public class SpongeSequenceStartEvent<E, F> implements SequenceStartEvent<E, F, Player>, Cancellable {
 
+    private final Origin origin;
+    private final Sequence<E, F, Player> sequence;
+    private final Player player;
+    private final Summary<E, F> summary;
 
-    public SpongeSequenceStartEvent(Cause cause) {
-        super(cause);
+    private boolean cancelled = false;
+
+    public SpongeSequenceStartEvent(Origin origin, Sequence<E, F, Player> sequence,
+                                    Player player, Summary<E, F> summary) {
+        this.origin = origin;
+        this.sequence = sequence;
+        this.player = player;
+        this.summary = summary;
     }
-
 
     @Override
     public Sequence<E, F, Player> getSequence() {
-        return null;
+        return this.sequence;
     }
 
     @Override
     public Player getPlayer() {
-        return null;
+        return this.player;
     }
 
     @Override
     public Summary<E, F> getSummary() {
-        return null;
+        return this.summary;
     }
 
     @Override
     public boolean isCancelled() {
-        return false;
+        return this.cancelled;
     }
 
     @Override
     public void setCancelled(boolean cancel) {
+        this.cancelled = cancel;
+    }
 
+    @Override
+    public Origin getOrigin() {
+        return this.origin;
     }
 
 }

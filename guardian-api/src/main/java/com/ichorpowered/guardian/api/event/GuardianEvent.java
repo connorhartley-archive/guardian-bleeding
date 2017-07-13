@@ -23,6 +23,15 @@
  */
 package com.ichorpowered.guardian.api.event;
 
+import com.ichorpowered.guardian.api.event.origin.Origin;
+
 public interface GuardianEvent {
+
+    /**
+     * Returns the {@link Origin} of this event.
+     *
+     * @return the event origin
+     */
+    Origin getOrigin();
 
 }
